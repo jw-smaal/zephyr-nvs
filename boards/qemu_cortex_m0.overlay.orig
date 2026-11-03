@@ -1,0 +1,20 @@
+/*
+ * Copyright 2026 Jan-Willem Smaal <usenet@gispen.org>
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/*
+ * Reconfigure the storage partition on the nRF51 simulated NVMC flash
+ * to allocate 4 pages (4 KB) at the end of the 256 KB flash space.
+ */
+/delete-node/ &storage_partition;
+
+&flash0 {
+	partitions {
+		storage_partition: partition@3f000 {
+			compatible = "zephyr,mapped-partition";
+			label = "storage";
+			reg = <0x0003f000 0x00001000>;
+		};
+	};
+};
